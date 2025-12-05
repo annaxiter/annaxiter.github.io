@@ -11,34 +11,74 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            /* O mesmo fundo do UDESAKEN */
+            /* Fundo Gradiente UDESAKEN */
             background: linear-gradient(-45deg, #020202, #1a0033, #0f0020, #000000);
             background-size: 400% 400%;
             animation: gradientBG 15s ease infinite;
             
-            /* Centralizar tudo na tela */
+            /* Centralização */
             height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             font-family: 'Poppins', sans-serif;
-            overflow: hidden; /* Tira barra de rolagem */
+            overflow: hidden;
+            position: relative; /* Importante para as partículas */
         }
 
-        /* Animação do Fundo */
         @keyframes gradientBG {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
 
-        /* --- O TEXTO (ANNAXITER) --- */
+        /* --- PARTICULAS (BOLINHAS SUBINDO) --- */
+        .particles {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            overflow: hidden;
+            z-index: 0; /* Fica atrás do texto */
+            pointer-events: none;
+        }
+
+        .particles span {
+            position: absolute;
+            display: block;
+            list-style: none;
+            width: 8px;
+            height: 8px;
+            background: rgba(138, 43, 226, 0.4); /* Roxo Udesaken */
+            animation: floatUp 25s linear infinite;
+            bottom: -150px;
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(138, 43, 226, 0.6);
+        }
+
+        /* Configuração de cada bolinha (tamanho, posição e velocidade) */
+        .particles span:nth-child(1) { left: 25%; width: 10px; height: 10px; animation-delay: 0s; }
+        .particles span:nth-child(2) { left: 10%; width: 5px; height: 5px; animation-delay: 2s; animation-duration: 12s; }
+        .particles span:nth-child(3) { left: 70%; width: 8px; height: 8px; animation-delay: 4s; }
+        .particles span:nth-child(4) { left: 40%; width: 12px; height: 12px; animation-delay: 0s; animation-duration: 18s; }
+        .particles span:nth-child(5) { left: 65%; width: 6px; height: 6px; animation-delay: 0s; }
+        .particles span:nth-child(6) { left: 75%; width: 8px; height: 8px; animation-delay: 3s; }
+        .particles span:nth-child(7) { left: 35%; width: 10px; height: 10px; animation-delay: 7s; }
+        .particles span:nth-child(8) { left: 50%; width: 6px; height: 6px; animation-delay: 15s; animation-duration: 45s; }
+        .particles span:nth-child(9) { left: 20%; width: 5px; height: 5px; animation-delay: 2s; animation-duration: 35s; }
+        .particles span:nth-child(10) { left: 85%; width: 10px; height: 10px; animation-delay: 0s; animation-duration: 11s; }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-1000px) rotate(720deg); opacity: 0; }
+        }
+
+        /* --- O NOME (ANNAXITER) --- */
         h1 {
-            font-size: 5rem; /* Tamanho do texto */
-            color: #fff;     /* Cor branca no centro */
-            text-transform: lowercase; /* Tudo minúsculo (estilo aesthetic) */
+            font-size: 5rem;
+            color: #fff;
+            text-transform: lowercase;
+            z-index: 1; /* Garante que o texto fique NA FRENTE das bolinhas */
             
-            /* O Brilho Roxo Poderoso */
+            /* Brilho Roxo */
             text-shadow: 
                 0 0 10px #8a2be2,
                 0 0 20px #8a2be2,
@@ -48,32 +88,34 @@
             animation: pulsoNeon 3s infinite alternate;
         }
 
-        /* Animação do brilho pulsando */
         @keyframes pulsoNeon {
             from {
-                text-shadow: 
-                0 0 10px #8a2be2,
-                0 0 20px #8a2be2,
-                0 0 40px #8a2be2;
+                text-shadow: 0 0 10px #8a2be2, 0 0 20px #8a2be2, 0 0 40px #8a2be2;
             }
             to {
-                text-shadow: 
-                0 0 20px #8a2be2,
-                0 0 40px #8a2be2,
-                0 0 80px #8a2be2,
-                0 0 100px #aa55ff; /* Um roxo mais claro no pico */
+                text-shadow: 0 0 20px #8a2be2, 0 0 40px #8a2be2, 0 0 80px #8a2be2, 0 0 100px #aa55ff;
             }
         }
 
-        /* Ajuste para celular */
         @media(max-width: 768px) {
-            h1 {
-                font-size: 3rem; /* Diminui um pouco no celular pra não quebrar */
-            }
+            h1 { font-size: 3rem; }
         }
     </style>
 </head>
 <body>
+
+    <div class="particles">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
 
     <h1>annaxiter</h1>
 
