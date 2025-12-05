@@ -4,26 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>annaxiter</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         /* --- CONFIGURAÇÕES BÁSICAS --- */
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            /* Fundo Gradiente UDESAKEN */
             background: linear-gradient(-45deg, #020202, #1a0033, #0f0020, #000000);
             background-size: 400% 400%;
             animation: gradientBG 15s ease infinite;
             
-            /* Centralização */
             height: 100vh;
             display: flex;
+            flex-direction: column; /* Coloca um item embaixo do outro */
             align-items: center;
             justify-content: center;
             font-family: 'Poppins', sans-serif;
             overflow: hidden;
-            position: relative; /* Importante para as partículas */
+            position: relative;
         }
 
         @keyframes gradientBG {
@@ -32,12 +32,12 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* --- PARTICULAS (BOLINHAS SUBINDO) --- */
+        /* --- PARTICULAS --- */
         .particles {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             overflow: hidden;
-            z-index: 0; /* Fica atrás do texto */
+            z-index: 0;
             pointer-events: none;
         }
 
@@ -47,14 +47,14 @@
             list-style: none;
             width: 8px;
             height: 8px;
-            background: rgba(138, 43, 226, 0.4); /* Roxo Udesaken */
+            background: rgba(138, 43, 226, 0.4);
             animation: floatUp 25s linear infinite;
             bottom: -150px;
             border-radius: 50%;
             box-shadow: 0 0 10px rgba(138, 43, 226, 0.6);
         }
 
-        /* Configuração de cada bolinha (tamanho, posição e velocidade) */
+        /* Posições das bolinhas */
         .particles span:nth-child(1) { left: 25%; width: 10px; height: 10px; animation-delay: 0s; }
         .particles span:nth-child(2) { left: 10%; width: 5px; height: 5px; animation-delay: 2s; animation-duration: 12s; }
         .particles span:nth-child(3) { left: 70%; width: 8px; height: 8px; animation-delay: 4s; }
@@ -71,14 +71,18 @@
             100% { transform: translateY(-1000px) rotate(720deg); opacity: 0; }
         }
 
-        /* --- O NOME (ANNAXITER) --- */
+        /* --- CONTEÚDO PRINCIPAL --- */
+        .container {
+            z-index: 1; /* Fica na frente das bolinhas */
+            text-align: center;
+        }
+
         h1 {
             font-size: 5rem;
             color: #fff;
             text-transform: lowercase;
-            z-index: 1; /* Garante que o texto fique NA FRENTE das bolinhas */
+            margin-bottom: 20px; /* Espaço para os botões */
             
-            /* Brilho Roxo */
             text-shadow: 
                 0 0 10px #8a2be2,
                 0 0 20px #8a2be2,
@@ -89,35 +93,84 @@
         }
 
         @keyframes pulsoNeon {
-            from {
-                text-shadow: 0 0 10px #8a2be2, 0 0 20px #8a2be2, 0 0 40px #8a2be2;
-            }
-            to {
-                text-shadow: 0 0 20px #8a2be2, 0 0 40px #8a2be2, 0 0 80px #8a2be2, 0 0 100px #aa55ff;
-            }
+            from { text-shadow: 0 0 10px #8a2be2, 0 0 20px #8a2be2, 0 0 40px #8a2be2; }
+            to { text-shadow: 0 0 20px #8a2be2, 0 0 40px #8a2be2, 0 0 80px #8a2be2, 0 0 100px #aa55ff; }
         }
 
+        /* --- BOTÕES SOCIAIS (SOBRE MIM) --- */
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .social-btn {
+            text-decoration: none;
+            color: #ccc;
+            padding: 12px 30px;
+            border: 1px solid #444;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: bold;
+            transition: 0.3s;
+            background: rgba(0,0,0,0.5); /* Fundo escurinho transparente */
+            backdrop-filter: blur(5px);
+        }
+
+        /* Efeito Base (Roxo Padrão ao passar o mouse) */
+        .social-btn:hover {
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* --- EFEITOS ESPECÍFICOS (Do seu site) --- */
+        
+        /* INSTAGRAM - Degradê Colorido */
+        .social-btn.instagram:hover {
+            background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+            border-color: #d6249f;
+            box-shadow: 0 0 20px rgba(214, 36, 159, 0.6);
+        }
+
+        /* TIKTOK - Glitch Preto/Ciano/Rosa */
+        .social-btn.tiktok:hover {
+            background: #000;
+            border-color: #00f2ea;
+            box-shadow: 3px 3px 0 #ff0050, -3px -3px 0 #00f2ea;
+            color: white;
+        }
+
+        /* Ajuste Mobile */
         @media(max-width: 768px) {
             h1 { font-size: 3rem; }
+            .social-links { flex-direction: column; width: 100%; padding: 0 20px; }
+            .social-btn { justify-content: center; width: 100%; }
         }
     </style>
 </head>
 <body>
 
     <div class="particles">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
+        <span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span>
     </div>
 
-    <h1>annaxiter</h1>
+    <div class="container">
+        <h1>annaxiter</h1>
+        
+        <div class="social-links">
+            <a href="https://www.instagram.com/annaclaudia_aa/" target="_blank" class="social-btn instagram">
+                <i class="fab fa-instagram"></i> Instagram
+            </a>
+            
+            <a href="https://www.tiktok.com/@annaxiter" target="_blank" class="social-btn tiktok">
+                <i class="fab fa-tiktok"></i> TikTok
+            </a>
+        </div>
+    </div>
 
 </body>
 </html>
